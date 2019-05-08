@@ -1,0 +1,217 @@
+{
+    "title": "Orders",
+    "description": "Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/walmart.com/order/3.0.1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://developer.walmart.com/orderProxy/order-api-doc-app/rest",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getAllOrders": {
+            "main": "./lib/actions/getAllOrders.js",
+            "title": "Get all orders",
+            "description": "You can display a list of all orders with the query parameter filter criteria.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAllOrders.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getReleasedOrders": {
+            "main": "./lib/actions/getReleasedOrders.js",
+            "title": "Get all released orders",
+            "description": "You can display all released orders that have been created and are ready for fulfilment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getReleasedOrders.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getNextCursorReleasedOrders": {
+            "main": "./lib/actions/getNextCursorReleasedOrders.js",
+            "title": "Get released orders for next page",
+            "description": "You can display all released orders that have been created and are ready for fulfilment with nextCursor path parameter.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getNextCursorReleasedOrders.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOrderByPurchaseOrderId": {
+            "main": "./lib/actions/getOrderByPurchaseOrderId.js",
+            "title": "Get an order",
+            "description": "You can display details of a specific order based on the purchaseOrderId.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOrderByPurchaseOrderId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "acknowledgeOrders": {
+            "main": "./lib/actions/acknowledgeOrders.js",
+            "title": "Acknowledge orders",
+            "description": "You can acknowledge an entire order, including all of its order lines. Walmart business rules require to acknowledge orders within four hour of receipt of the order, except in extenuating circumstances.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/acknowledgeOrders.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cancelOrder": {
+            "main": "./lib/actions/cancelOrder.js",
+            "title": "Cancel order lines",
+            "description": "You can cancel one or more order lines. You must include a purchaseOrderLineNumber when cancelling an order. After cancelling your order, update the inventory for the cancelled order and send it in the next inventory feed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/xml": "application/xml",
+                        "application/json": "application/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cancelOrder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "refundOrder": {
+            "main": "./lib/actions/refundOrder.js",
+            "title": "Refund order lines",
+            "description": "You can refund one or more order lines that have been shipped. The response to a successful call contains the order with the refunded line item.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/xml": "application/xml",
+                        "application/json": "application/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/refundOrder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "shippingOrder": {
+            "main": "./lib/actions/shippingOrder.js",
+            "title": "Shipping updates",
+            "description": "You can change the status of order lines to \"Shipped\" and trigger the charge to a customer. You must acknowledge your orders before sending a shipping update to avoid underselling. An order line, once marked as shipped, cannot be updated.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/xml": "application/xml",
+                        "application/json": "application/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/shippingOrder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAllOrdersNext": {
+            "main": "./lib/actions/getAllOrdersNext.js",
+            "title": "Get orders for next page",
+            "description": "You can display a list of all orders with nextCursor path parameter pagination criteria.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAllOrdersNext.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

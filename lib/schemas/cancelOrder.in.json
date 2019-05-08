@@ -1,0 +1,66 @@
+{
+    "type": "object",
+    "properties": {
+        "purchaseOrderId": {
+            "required": true,
+            "type": "string"
+        },
+        "shipNode": {
+            "required": false,
+            "type": "string"
+        },
+        "Accept": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "application/xml",
+                "application/json"
+            ],
+            "default": "application/xml"
+        },
+        "requestBody": {
+            "type": "string"
+        },
+        "Content_Type": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "application/xml",
+                "application/json"
+            ],
+            "default": "application/xml"
+        },
+        "WM_CONSUMER_CHANNEL_TYPE": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "SWAGGER_CHANNEL_TYPE"
+            ],
+            "default": "SWAGGER_CHANNEL_TYPE"
+        },
+        "WM_CONSUMER_ID": {
+            "required": true,
+            "type": "string"
+        },
+        "WM_SEC_TIMESTAMP": {
+            "required": true,
+            "type": "string",
+            "default": "Auto populated"
+        },
+        "WM_SEC_AUTH_SIGNATURE": {
+            "required": true,
+            "type": "string",
+            "default": "Auto populated"
+        },
+        "WM_SVC_NAME": {
+            "required": true,
+            "type": "string",
+            "default": "Walmart Marketplace"
+        },
+        "WM_QOS_CORRELATION_ID": {
+            "required": true,
+            "type": "string",
+            "default": "123456abcdef"
+        }
+    }
+}
